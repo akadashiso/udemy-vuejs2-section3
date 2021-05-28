@@ -9,11 +9,21 @@
   <link rel="stylesheet" type="text/css" href="app.css">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
   <title>Document</title>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
 </head>
 
 <body>
   <div id="app">
-    <form>
+    <p v-if="errors.length">
+      <ul>
+        <li class="error" v-for="error in errors">{{ error }}</li>
+      </ul>
+    </p>
+    <form @submit="validate.prevent">
       氏名
       <input type="text" v-model="contact.yourName">
       <br>
@@ -66,9 +76,18 @@
             message: '',
             attracts: [],
             caution: false
-          }
+          },
+          errors: []
         }
       },
+      methods: {
+        validate() {
+          this.errors = []
+          if (!this.contact.caution) {
+            this.errors.push('注意事項にチェックを入れてください。')
+          }
+        }
+      }
     })
   </script>
 
