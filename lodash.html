@@ -13,9 +13,6 @@
 <body>
 
   <script>
-    // window.addEventListener('resize', () => {
-    //   console.log('リサイズしたよ')
-    // })
     window.addEventListener('resize', _.debounce(() => {
       console.log('debounceでリサイズ')
     }, 3000))
